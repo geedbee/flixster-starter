@@ -4,8 +4,18 @@
   justify-content: center;
   width: 80%;
   height: 500px;
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 .movie-card:hover{
     filter: brightness(50%);
+}
+
+.movie-card-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
 }
