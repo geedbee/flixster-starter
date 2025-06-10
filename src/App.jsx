@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import NewMovieList from './components/NewMovieList'
 import Search from './components/Search'
+import MovieList from './components/MovieList'
 import Modal from './components/Modal'
 
 const App = () => {
@@ -10,10 +11,13 @@ const App = () => {
   const [modal, setModal] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sort, setSort] = useState('none');
+  const [data, setData] = useState([]);
+  const [searchData, setSearchData] = useState([]);
 
   function HandleSearchToggle(e){
     if (e.target.checked){
       setIsSearch(true);
+      setSearchData(data);
     }
     else {
       setIsSearch(false);
@@ -55,8 +59,8 @@ const App = () => {
          </div>
       </header>
       <main>
-        {isSearch ? <Search setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/> :
-        <NewMovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
+        {isSearch ? <Search setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort} data={searchData} setData={setSearchData} newMovieData={data}/> :
+        <NewMovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort} data={data} setData={setData}/>}
       </main>
       <footer></footer>
     </div>

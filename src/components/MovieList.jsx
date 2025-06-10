@@ -2,7 +2,9 @@ import {useState, useEffect} from 'react';
 import { parseMovieData , parseMovieDetails, compareDates} from '../utils/utils';
 import MovieCard from './MovieCard';
 
-function NewMovieList({setModal, setIsModalOpen, isModalOpen, sort, data, setData}){
+function NewMovieList({isSearch, setModal, setIsModalOpen, isModalOpen, sort}){
+    const [data, setData] = useState([]);
+    const [search, setSearch] = useState('');
     const [pageIdx, setPageIdx] = useState(1);
 
     //modal handling
@@ -45,7 +47,30 @@ function NewMovieList({setModal, setIsModalOpen, isModalOpen, sort, data, setDat
     }, [sort]);
 
     //fetching data
-    const fetchData = async (isNewSearch) => {
+    const fetchSearchData = async (isFirst) => {
+        const apiKey = import.meta.env.VITE_API_KEY;
+        const options = {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: `Bearer ${apiKey}`
+            }
+          };
+        const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=${pageIdx}`, options);
+        if (!response.ok) {
+            throw new Error('Failed to fetch movie list data');
+        }
+        //if it is the first page, we want to reset the data
+        const result = await response.json();
+        if (isFirst){
+            setData(parseMovieData(result.results));
+            setPageIdx(1);
+        }
+        else{
+            setData([...data, ...parseMovieData(result.results)]);
+        }
+    }
+    const fetchNewMovieData = async (isFirst) => {
         const apiKey = import.meta.env.VITE_API_KEY;
         const options = {
             method: 'GET',
@@ -58,28 +83,59 @@ function NewMovieList({setModal, setIsModalOpen, isModalOpen, sort, data, setDat
         if (!response.ok) {
             throw new Error('Failed to fetch movie list data');
         }
+        //if it is the first page, we want to reset the data
         const result = await response.json();
-        if (isNewSearch) {
+        if (isFirst){
             setData(parseMovieData(result.results));
+            setPageIdx(1);
         }
         else{
             setData([...data, ...parseMovieData(result.results)]);
         }
     }
-    useEffect(() => {
-        if (pageIdx === 1){
-            fetchData(true);
-        }
-    }, [pageIdx]);
 
     //load more
     function HandleLoadMore(){
         console.log('Load more');
         setPageIdx(pageIdx + 1);
     }
+    useEffect(() => {
+        if (isSearch){
+            fetchSearchData(false);
+        }
+        else{
+            fetchNewMovieData(false);
+        }
+    }, [pageIdx]);
+
+
+    //handle search
+    function HandleSearch(event){
+        console.log('Search');
+        event.preventDefault();
+        fetchSearchData(true);
+    }
+    function HandleSearchChange(event){
+        setSearch(event.target.value);
+    }
+
+    //handle toggle
+    useEffect(() => {
+        if (!isSearch){
+            fetchNewMovieData(true);
+        }
+        else{
+            fetchSearchData(true);
+        }
+    }, [isSearch]);
 
     return(
     <>
+        {isSearch && <form onSubmit={HandleSearch}>
+            <input type="text" name="search" value={search} onChange={HandleSearchChange} placeholder="search"/>
+            <button type="submit">Search</button>
+            <button onClick={() => fetchNewMovieData(true)}>Clear</button>
+        </form>}
         <div className="movie-card-container">
         {data.map((movie, index) => (
             <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}/>
