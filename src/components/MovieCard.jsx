@@ -1,10 +1,10 @@
 import "../MovieCard.css"
 
-function MovieCard({title, img, voteAvg}){
+function MovieCard({id, title, img, voteAvg, setModalId, setIsModalOpen}){
     return(
-    <div className="movie-card">
+    <div className="movie-card" onClick={() => (console.log("open modal"),setModalId(id), setIsModalOpen(true))}>
+        <img className="movie-card-img" src={`https://image.tmdb.org/t/p/w500${img}`} alt={title} />
         <p>{title}</p>
-        <img src={`https://image.tmdb.org/t/p/w92${img}`} alt={title} />
         <p>{voteAvg}</p>
     </div>
     );

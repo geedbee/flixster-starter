@@ -7,36 +7,20 @@
 .App-header {
   background-color: #282c34;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
   color: white;
-  padding: 20px;
+  height: 7vh;
+  justify-content: center;
 }
 main {
-  margin: 20px;
+  margin-left: 100px;
+  margin-right: 100px;
   overflow-y: scroll;
+  height: 90vh;
 }
 footer{
   background-color: #282c34;
-  height: 50px;
+  height: 3vh;
 }
-
-@media (max-width: 600px) {
-  .movie-card {
-    width: 100%;
-  }
-
-  .search-bar {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .search-bar form {
-    flex-direction: column;
-  }
-}
-
 .movie-card-container {
   display: grid;
   justify-items: center;
