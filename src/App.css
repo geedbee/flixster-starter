@@ -1,7 +1,9 @@
 .App {
   text-align: center;
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+  height: 100vh;
 }
-
 .App-header {
   background-color: #282c34;
   display: flex;
@@ -10,6 +12,14 @@
   justify-content: space-evenly;
   color: white;
   padding: 20px;
+}
+main {
+  margin: 20px;
+  overflow-y: scroll;
+}
+footer{
+  background-color: #282c34;
+  height: 50px;
 }
 
 @media (max-width: 600px) {
@@ -25,4 +35,10 @@
   .search-bar form {
     flex-direction: column;
   }
+}
+
+.movie-card-container {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
