@@ -10,6 +10,7 @@ const parseMovieData = function parseMovieData(results) {
            title: data.title,
            img: data.poster_path,
            voteAvg: data.vote_average,
+           releaseDate: data.release_date
        })
     }
     return dataArr;
@@ -45,4 +46,14 @@ const convertReleaseDate = function convertReleaseDate(date){
     return dateArr[1] + '/' + dateArr[2] + '/' + dateArr[0];
 }
 
-export {parseMovieData, parseMovieDetails, convertRuntime, convertReleaseDate}
+//passes in dates in the format "YYYY-MM-DD"
+const compareDates = function compareDates(a, b){
+    let year1, month1, day1, year2, month2, day2;
+    [year1, month1, day1] = a.split('-');
+    [year2, month2, day2] = b.split('-');
+    const date1 = new Date(parseInt(year1), parseInt(month1), parseInt(day1));
+    const date2 = new Date(parseInt(year2), parseInt(month2), parseInt(day2));
+    return date2 - date1;
+}
+
+export {parseMovieData, parseMovieDetails, convertRuntime, convertReleaseDate, compareDates}
