@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react';
-import { parseMovieData , parseMovieDetails} from '../utils/utils';
+import { parseMovieData , parseMovieDetails, compareDates} from '../utils/utils';
 import MovieCard from './MovieCard';
 
-function NewMovieList({setModal, setIsModalOpen, isModalOpen}){
+function NewMovieList({setModal, setIsModalOpen, isModalOpen, sort}){
     const [data, setData] = useState([]);
     const [pageIdx, setPageIdx] = useState(1);
 
@@ -28,6 +28,26 @@ function NewMovieList({setModal, setIsModalOpen, isModalOpen}){
         console.log(parseMovieDetails(result));
         setModal(parseMovieDetails(result));
     }
+
+    //sort handling
+    useEffect(() => {
+        if (sort != 'none'){
+            let dataCpy = [...data];
+            if (sort === 'name'){
+                console.log('Sorting by name');
+                setData(dataCpy.sort((a, b) => a.title.localeCompare(b.title)));
+            }
+            else if (sort === 'votes'){
+                console.log('Sorting by votes');
+                setData(dataCpy.sort((a, b) => b.voteAvg - a.voteAvg));
+            }
+            else if (sort === 'dates'){
+                console.log('Sorting by dates');
+                console.log(dataCpy);
+                setData(dataCpy.sort((a, b) => compareDates(a.releaseDate, b.releaseDate)));
+            }
+        }
+    }, [sort]);
 
     //fetching data
     const fetchData = async () => {
