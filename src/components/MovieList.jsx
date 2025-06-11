@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import { parseMovieData , parseMovieDetails, compareDates} from '../utils/utils';
 import MovieCard from './MovieCard';
 
-function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
+function MovieList({setModal, setIsModalOpen, isModalOpen, sort, liked, setLiked, watched, setWatched}){
     const [data, setData] = useState([]); //what will show in MovieCards
     const [search, setSearch] = useState('');
     const [pageIdx, setPageIdx] = useState(1);
@@ -53,6 +53,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
     }, [sort]);
 
     //fetching data
+    //SEARCH API
     const fetchSearchData = async (isFirst) => {
         const apiKey = import.meta.env.VITE_API_KEY;
         const options = {
@@ -76,6 +77,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
             setData([...data, ...parseMovieData(result.results)]);
         }
     }
+    //NOW PLAYING API
     const fetchNewMovieData = async (isFirst) => {
         const apiKey = import.meta.env.VITE_API_KEY;
         const options = {
@@ -137,7 +139,8 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
         </form>
         <div className="movie-card-container">
         {data.map((movie, index) => (
-            <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}/>
+            <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}
+            liked={liked} setLiked={setLiked} watched={watched} setWatched={setWatched}/>
         ))}
         </div>
         <button onClick={HandleLoadMore}>Load More</button>
