@@ -6,7 +6,7 @@ function Sidebar({pageIdx, setPageIdx}){
     const [isOpen, setIsOpen] = useState(false);
 
     function OpenMenu(){
-        setIsOpen(true);
+        setIsOpen(!isOpen);
     }
     function HandleClick(idx){
         if (pageIdx !== idx){
