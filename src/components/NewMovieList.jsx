@@ -70,6 +70,9 @@ function NewMovieList({setModal, setIsModalOpen, isModalOpen, sort, data, setDat
         if (pageIdx === 1){
             fetchData(true);
         }
+        else{
+            fetchData(false);
+        }
     }, [pageIdx]);
 
     //load more

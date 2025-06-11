@@ -2,10 +2,16 @@ import {useState, useEffect} from 'react';
 import { parseMovieData , parseMovieDetails, compareDates} from '../utils/utils';
 import MovieCard from './MovieCard';
 
-function NewMovieList({isSearch, setModal, setIsModalOpen, isModalOpen, sort}){
+function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
     const [data, setData] = useState([]);
     const [search, setSearch] = useState('');
     const [pageIdx, setPageIdx] = useState(1);
+    const [isSearch, setIsSearch] = useState(false);
+
+    //initial load
+    useEffect(() => {
+        fetchNewMovieData(true);
+    }, []);
 
     //modal handling
     const [modalId, setModalId] = useState(null);
@@ -56,6 +62,7 @@ function NewMovieList({isSearch, setModal, setIsModalOpen, isModalOpen, sort}){
                 Authorization: `Bearer ${apiKey}`
             }
           };
+        console.log(`https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=${pageIdx}`);
         const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=${pageIdx}`, options);
         if (!response.ok) {
             throw new Error('Failed to fetch movie list data');
@@ -64,7 +71,6 @@ function NewMovieList({isSearch, setModal, setIsModalOpen, isModalOpen, sort}){
         const result = await response.json();
         if (isFirst){
             setData(parseMovieData(result.results));
-            setPageIdx(1);
         }
         else{
             setData([...data, ...parseMovieData(result.results)]);
@@ -79,6 +85,7 @@ function NewMovieList({isSearch, setModal, setIsModalOpen, isModalOpen, sort}){
                 Authorization: `Bearer ${apiKey}`
             }
           };
+        console.log(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageIdx}`);
         const response = await fetch(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageIdx}`, options)
         if (!response.ok) {
             throw new Error('Failed to fetch movie list data');
@@ -87,7 +94,6 @@ function NewMovieList({isSearch, setModal, setIsModalOpen, isModalOpen, sort}){
         const result = await response.json();
         if (isFirst){
             setData(parseMovieData(result.results));
-            setPageIdx(1);
         }
         else{
             setData([...data, ...parseMovieData(result.results)]);
@@ -96,46 +102,41 @@ function NewMovieList({isSearch, setModal, setIsModalOpen, isModalOpen, sort}){
 
     //load more
     function HandleLoadMore(){
-        console.log('Load more');
         setPageIdx(pageIdx + 1);
     }
     useEffect(() => {
         if (isSearch){
-            fetchSearchData(false);
+            fetchSearchData(pageIdx === 1);
         }
         else{
-            fetchNewMovieData(false);
+            fetchNewMovieData(pageIdx === 1);
         }
-    }, [pageIdx]);
-
+    }, [pageIdx, isSearch]);
 
     //handle search
     function HandleSearch(event){
-        console.log('Search');
         event.preventDefault();
+        setIsSearch(true);
+        setPageIdx(1);
         fetchSearchData(true);
     }
     function HandleSearchChange(event){
         setSearch(event.target.value);
     }
-
-    //handle toggle
-    useEffect(() => {
-        if (!isSearch){
-            fetchNewMovieData(true);
-        }
-        else{
-            fetchSearchData(true);
-        }
-    }, [isSearch]);
+    function HandleClear(){
+        setSearch('');
+        setIsSearch(false);
+        setPageIdx(1);
+        fetchNewMovieData(true);
+    }
 
     return(
     <>
-        {isSearch && <form onSubmit={HandleSearch}>
+        <form onSubmit={HandleSearch}>
             <input type="text" name="search" value={search} onChange={HandleSearchChange} placeholder="search"/>
             <button type="submit">Search</button>
-            <button onClick={() => fetchNewMovieData(true)}>Clear</button>
-        </form>}
+            <button type="button" onClick={HandleClear}>Clear</button>
+        </form>
         <div className="movie-card-container">
         {data.map((movie, index) => (
             <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}/>
@@ -146,4 +147,4 @@ function NewMovieList({isSearch, setModal, setIsModalOpen, isModalOpen, sort}){
     );
 }
 
-export default NewMovieList;
+export default MovieList;
