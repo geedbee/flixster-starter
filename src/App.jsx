@@ -2,14 +2,23 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import MovieList from './components/MovieList'
 import Modal from './components/Modal'
+import Sidebar from './components/Sidebar'
+import Liked from './components/Liked'
+import Watched from './components/Watched'
 
 const App = () => {
   //modal handling
   const [modal, setModal] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  //sort handling
   const [sort, setSort] = useState('none');
+
   const [liked, setLiked] = useState([]);
   const [watched, setWatched] = useState([]);
+
+  //page handling
+  const [pageIdx, setPageIdx] = useState(0);
+  //0 is home, 1 is liked, 2 is watched
 
   useEffect(() => {
   }, [isModalOpen]);
@@ -37,6 +46,7 @@ const App = () => {
   return (
     <div className="App">
       {isModalOpen && modal && <Modal modalInfo={modal} setModal={setModal} setIsModalOpen={setIsModalOpen}></Modal>}
+      <Sidebar pageIdx={pageIdx} setPageIdx={setPageIdx}></Sidebar>
       <header className="App-header">
         <h1>Flixster</h1>
         <div className="sort-bar">
@@ -46,11 +56,15 @@ const App = () => {
                 <option value="dates">Release Date (newest)</option>
                 <option value="votes">Vote Average (highest)</option>
              </select>
-         </div>
+        </div>
       </header>
       <main>
-        <MovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort} liked={liked} setLiked={setLiked}
-        watched={watched} setWatched={setWatched}/>
+        {pageIdx === 0 && <MovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort} liked={liked} setLiked={setLiked}
+        watched={watched} setWatched={setWatched}/>}
+        {pageIdx === 1 && <Liked setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort} liked={liked} setLiked={setLiked}
+        watched={watched} setWatched={setWatched}/>}
+        {pageIdx === 2 && <Watched setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort} liked={liked} setLiked={setLiked}
+        watched={watched} setWatched={setWatched}/>}
       </main>
       <footer>Flixster {new Date().getFullYear()}</footer>
     </div>

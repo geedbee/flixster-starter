@@ -30,6 +30,7 @@ const parseMovieDetails = function parseMovieDetails(data) {
     }
     details.overview = data.overview;
 
+    details.voteAvg = data.vote_average;
     details.id = data.id;
     details.title = data.title;
     return details;
