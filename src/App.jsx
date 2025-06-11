@@ -1,28 +1,17 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import NewMovieList from './components/NewMovieList'
-import Search from './components/Search'
 import MovieList from './components/MovieList'
 import Modal from './components/Modal'
 
 const App = () => {
-  const [isSearch, setIsSearch] = useState(false);
   //modal handling
   const [modal, setModal] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sort, setSort] = useState('none');
-  const [data, setData] = useState([]);
-  const [searchData, setSearchData] = useState([]);
+  useEffect(() => {
+  }, [isModalOpen]);
 
-  function HandleSearchToggle(e){
-    if (e.target.checked){
-      setIsSearch(true);
-      setSearchData(data);
-    }
-    else {
-      setIsSearch(false);
-    }
-  }
+  //sort handling
   function HandleSort(e){
     switch (e.target.value){
       case 'name':
@@ -36,9 +25,6 @@ const App = () => {
         break;
     }
   }
-
-  useEffect(() => {
-  }, [isModalOpen]);
 
   return (
     <div className="App">
@@ -55,9 +41,9 @@ const App = () => {
          </div>
       </header>
       <main>
-        <MovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort} data={data} setData={setData}/>
+        <MovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>
       </main>
-      <footer></footer>
+      <footer>Flixster {new Date().getFullYear()}</footer>
     </div>
   )
 }
