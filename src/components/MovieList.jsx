@@ -3,7 +3,7 @@ import { parseMovieData , parseMovieDetails, compareDates} from '../utils/utils'
 import MovieCard from './MovieCard';
 
 function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([]); //what will show in MovieCards
     const [search, setSearch] = useState('');
     const [pageIdx, setPageIdx] = useState(1);
     const [isSearch, setIsSearch] = useState(false);
@@ -100,7 +100,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
         }
     }
 
-    //load more
+    //updates: load more and when user searches/clears
     function HandleLoadMore(){
         setPageIdx(pageIdx + 1);
     }
@@ -118,7 +118,6 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
         event.preventDefault();
         setIsSearch(true);
         setPageIdx(1);
-        fetchSearchData(true);
     }
     function HandleSearchChange(event){
         setSearch(event.target.value);
@@ -127,7 +126,6 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
         setSearch('');
         setIsSearch(false);
         setPageIdx(1);
-        fetchNewMovieData(true);
     }
 
     return(
