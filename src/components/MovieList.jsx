@@ -31,8 +31,6 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, liked, setLiked
         };
         const response = await fetch(`https://api.themoviedb.org/3/movie/${modalId}`, options);
         const result = await response.json();
-        console.log(result);
-        console.log(parseMovieDetails(result));
         setModal(parseMovieDetails(result));
     }
 
@@ -63,7 +61,6 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, liked, setLiked
                 Authorization: `Bearer ${apiKey}`
             }
           };
-        console.log(`https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=${pageIdx}`);
         const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=${pageIdx}`, options);
         if (!response.ok) {
             throw new Error('Failed to fetch movie list data');
@@ -87,7 +84,6 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, liked, setLiked
                 Authorization: `Bearer ${apiKey}`
             }
           };
-        console.log(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageIdx}`);
         const response = await fetch(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageIdx}`, options)
         if (!response.ok) {
             throw new Error('Failed to fetch movie list data');
