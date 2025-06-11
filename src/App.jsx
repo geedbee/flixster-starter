@@ -45,10 +45,6 @@ const App = () => {
       {isModalOpen && modal && <Modal modalInfo={modal} setModal={setModal} setIsModalOpen={setIsModalOpen}></Modal>}
       <header className="App-header">
         <h1>Flixster</h1>
-        <div className='search-toggle-container'>
-          <input type="checkbox" id="searchToggle" name="searchToggle" onClick={HandleSearchToggle}></input>
-          <label htmlFor="searchToggle">Toggle</label>
-        </div>
         <div className="sort-bar">
             <select name="sort" onChange={HandleSort}>
                 <option value="none">Sort By</option>
@@ -59,8 +55,7 @@ const App = () => {
          </div>
       </header>
       <main>
-        {isSearch ? <Search setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort} data={searchData} setData={setSearchData} newMovieData={data}/> :
-        <NewMovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort} data={data} setData={setData}/>}
+        <MovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort} data={data} setData={setData}/>
       </main>
       <footer></footer>
     </div>
