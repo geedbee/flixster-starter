@@ -9,6 +9,11 @@ import { MdMovieFilter } from "react-icons/md";
 
 export const LikeContext = createContext();
 export const WatchedContext = createContext();
+const Page = {
+  Home: 0,
+  Liked: 1,
+  Watched: 2
+}
 
 const App = () => {
   //modal handling
@@ -21,8 +26,7 @@ const App = () => {
   const [watched, setWatched] = useState([]);
 
   //page handling
-  const [pageIdx, setPageIdx] = useState(0);
-  //0 is home, 1 is liked, 2 is watched
+  const [pageIdx, setPageIdx] = useState(Page.Home);
 
   useEffect(() => {
   }, [isModalOpen]);
@@ -61,9 +65,9 @@ const App = () => {
       <main>
         <WatchedContext.Provider value={{watched, setWatched}}>
         <LikeContext.Provider value={{liked, setLiked}}>
-          {pageIdx === 0 && <MovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
-          {pageIdx === 1 && <Liked setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
-          {pageIdx === 2 && <Watched setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
+          {pageIdx === Page.Home && <MovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
+          {pageIdx === Page.Liked && <Liked setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
+          {pageIdx === Page.Watched && <Watched setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
         </LikeContext.Provider>
         </WatchedContext.Provider>
       </main>
