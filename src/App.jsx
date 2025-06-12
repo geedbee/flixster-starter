@@ -7,8 +7,7 @@ import Liked from './components/Liked'
 import Watched from './components/Watched'
 import { MdMovieFilter } from "react-icons/md";
 
-export const LikeContext = createContext();
-export const WatchedContext = createContext();
+export const LikedWatchedContext = createContext();
 export const Page = {
   Home: 0,
   Liked: 1,
@@ -22,8 +21,8 @@ const App = () => {
   //sort handling
   const [sort, setSort] = useState('none');
 
-  const [liked, setLiked] = useState([]);
-  const [watched, setWatched] = useState([]);
+  const [likedList, setLikedList] = useState([]);
+  const [watchedList, setWatchedList] = useState([]);
 
   //page handling
   const [pageIdx, setPageIdx] = useState(Page.Home);
@@ -63,6 +62,7 @@ const App = () => {
       setMoviePageIdx(1);
   }
 
+  const options = ["none", "name", "dates", "votes"];
 
   return (
     <div className="App">
@@ -72,27 +72,26 @@ const App = () => {
         <h1><MdMovieFilter />Flixster</h1>
         <div className="sort-bar">
             <select name="sort" onChange={HandleSort}>
-                <option value="none">Sort By</option>
-                <option value="name">Title (A-Z)</option>
-                <option value="dates">Release Date (newest)</option>
-                <option value="votes">Vote Average (highest)</option>
+                {options.map((option, index) => (
+                  <option key={index} value={option}>{option === "none" ? "Sort By" : option[0].toUpperCase() + option.slice(1)}</option>
+                ))}
              </select>
         </div>
-        <form onSubmit={HandleSearch}>
-            <input type="text" name="search" value={search} onChange={HandleSearchChange} placeholder="search"/>
-            <button type="submit">Search</button>
-            <button type="button" onClick={HandleClear}>Clear</button>
-        </form>
+        <div className="search-bar">
+          <form onSubmit={HandleSearch}>
+              <input type="text" name="search" value={search} onChange={HandleSearchChange} placeholder="Search"/>
+              <button type="submit">Search</button>
+              <button type="button" onClick={HandleClear}>Clear</button>
+          </form>
+        </div>
       </header>
       <main>
-        <WatchedContext.Provider value={{watched, setWatched}}>
-        <LikeContext.Provider value={{liked, setLiked}}>
+        <LikedWatchedContext.Provider value={{watchedList, setWatchedList, likedList, setLikedList}}>
           {pageIdx === Page.Home && <MovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}
-          search={search} setSearch={setSearch} isSearch={isSearch} setIsSearch={setIsSearch} pageIdx={moviePageIdx} setPageIdx={setMoviePageIdx}/>}
+          search={search} isSearch={isSearch} pageIdx={moviePageIdx} setPageIdx={setMoviePageIdx}/>}
           {pageIdx === Page.Liked && <Liked setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
           {pageIdx === Page.Watched && <Watched setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
-        </LikeContext.Provider>
-        </WatchedContext.Provider>
+        </LikedWatchedContext.Provider>
       </main>
       <footer>Flixster {new Date().getFullYear()}</footer>
     </div>
