@@ -2,11 +2,8 @@ import {useState, useEffect} from 'react';
 import { parseMovieData , parseMovieDetails, handleSort, getMovieDetails} from '../utils/utils';
 import MovieCard from './MovieCard';
 
-function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
+function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPageIdx, search, setSearch, isSearch, setIsSearch}){
     const [data, setData] = useState([]); //what will show in MovieCards
-    const [search, setSearch] = useState('');
-    const [pageIdx, setPageIdx] = useState(1);
-    const [isSearch, setIsSearch] = useState(false);
 
     //initial load
     useEffect(() => {
@@ -93,28 +90,9 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
         }
     }, [pageIdx, isSearch]);
 
-    //handle search
-    function HandleSearch(event){
-        event.preventDefault();
-        setIsSearch(true);
-        setPageIdx(1);
-    }
-    function HandleSearchChange(event){
-        setSearch(event.target.value);
-    }
-    function HandleClear(){
-        setSearch('');
-        setIsSearch(false);
-        setPageIdx(1);
-    }
 
     return(
     <>
-        <form onSubmit={HandleSearch}>
-            <input type="text" name="search" value={search} onChange={HandleSearchChange} placeholder="search"/>
-            <button type="submit">Search</button>
-            <button type="button" onClick={HandleClear}>Clear</button>
-        </form>
         <div className="movie-card-container">
         {data.map((movie, index) => (
             <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}/>

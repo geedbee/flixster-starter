@@ -45,6 +45,23 @@ const App = () => {
         break;
     }
   }
+  //handle search
+  const [search, setSearch] = useState('');
+  const [moviePageIdx, setMoviePageIdx] = useState(1);
+  const [isSearch, setIsSearch] = useState(false);
+  function HandleSearch(event){
+      event.preventDefault();
+      setIsSearch(true);
+      setMoviePageIdx(1);
+  }
+  function HandleSearchChange(event){
+      setSearch(event.target.value);
+  }
+  function HandleClear(){
+      setSearch('');
+      setIsSearch(false);
+      setMoviePageIdx(1);
+  }
 
 
   return (
@@ -61,11 +78,17 @@ const App = () => {
                 <option value="votes">Vote Average (highest)</option>
              </select>
         </div>
+        <form onSubmit={HandleSearch}>
+            <input type="text" name="search" value={search} onChange={HandleSearchChange} placeholder="search"/>
+            <button type="submit">Search</button>
+            <button type="button" onClick={HandleClear}>Clear</button>
+        </form>
       </header>
       <main>
         <WatchedContext.Provider value={{watched, setWatched}}>
         <LikeContext.Provider value={{liked, setLiked}}>
-          {pageIdx === Page.Home && <MovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
+          {pageIdx === Page.Home && <MovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}
+          search={search} setSearch={setSearch} isSearch={isSearch} setIsSearch={setIsSearch} pageIdx={moviePageIdx} setPageIdx={setMoviePageIdx}/>}
           {pageIdx === Page.Liked && <Liked setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
           {pageIdx === Page.Watched && <Watched setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
         </LikeContext.Provider>
