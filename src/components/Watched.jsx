@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext} from 'react';
 import MovieCard from './MovieCard';
-import {parseMovieData, parseMovieDetails, compareDates} from '../utils/utils.js';
+import {parseMovieData, parseMovieDetails, compareDates, handleSort} from '../utils/utils.js';
 import { WatchedContext } from "../App.jsx";
 
 function Watched({setModal, setIsModalOpen, isModalOpen, sort}){
@@ -38,16 +38,7 @@ function Watched({setModal, setIsModalOpen, isModalOpen, sort}){
     //sort handling
     useEffect(() => {
         if (sort != 'none'){
-            let dataCpy = [...data];
-            if (sort === 'name'){
-                setData(dataCpy.sort((a, b) => a.title.localeCompare(b.title)));
-            }
-            else if (sort === 'votes'){
-                setData(dataCpy.sort((a, b) => b.voteAvg - a.voteAvg));
-            }
-            else if (sort === 'dates'){
-                setData(dataCpy.sort((a, b) => compareDates(a.releaseDate, b.releaseDate)));
-            }
+            handleSort(sort, data);
         }
     }, [sort]);
 

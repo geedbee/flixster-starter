@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react';
-import { parseMovieData , parseMovieDetails, compareDates} from '../utils/utils';
+import { parseMovieData , parseMovieDetails, handleSort} from '../utils/utils';
 import MovieCard from './MovieCard';
 
-function MovieList({setModal, setIsModalOpen, isModalOpen, sort, watched, setWatched}){
+function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
     const [data, setData] = useState([]); //what will show in MovieCards
     const [search, setSearch] = useState('');
     const [pageIdx, setPageIdx] = useState(1);
@@ -37,16 +37,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, watched, setWat
     //sort handling
     useEffect(() => {
         if (sort != 'none'){
-            let dataCpy = [...data];
-            if (sort === 'name'){
-                setData(dataCpy.sort((a, b) => a.title.localeCompare(b.title)));
-            }
-            else if (sort === 'votes'){
-                setData(dataCpy.sort((a, b) => b.voteAvg - a.voteAvg));
-            }
-            else if (sort === 'dates'){
-                setData(dataCpy.sort((a, b) => compareDates(a.releaseDate, b.releaseDate)));
-            }
+            setData(handleSort(sort, data));
         }
     }, [sort]);
 
