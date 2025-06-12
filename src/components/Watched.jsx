@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext} from 'react';
 import MovieCard from './MovieCard';
-import {parseMovieData, parseMovieDetails, compareDates, handleSort} from '../utils/utils.js';
+import {parseMovieData, parseMovieDetails, compareDates, handleSort, getMovieDetails} from '../utils/utils.js';
 import { WatchedContext } from "../App.jsx";
 
 function Watched({setModal, setIsModalOpen, isModalOpen, sort}){
@@ -22,16 +22,7 @@ function Watched({setModal, setIsModalOpen, isModalOpen, sort}){
         }
     }, [isModalOpen]);
     async function populateModal(){
-        const apiKey = import.meta.env.VITE_API_KEY;
-        const options = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${apiKey}`
-            }
-        };
-        const response = await fetch(`https://api.themoviedb.org/3/movie/${modalId}`, options);
-        const result = await response.json();
+        const result = await getMovieDetails(modalId);
         setModal(parseMovieDetails(result));
     }
 
@@ -54,11 +45,7 @@ function Watched({setModal, setIsModalOpen, isModalOpen, sort}){
         setData([]);
         let watchedData = [];
         for (let id of watched){
-            const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
-            if (!response.ok) {
-                throw new Error('Failed to fetch atched list data');
-            }
-            const result = await response.json();
+            const result = await getMovieDetails(id);
             watchedData.push(parseMovieDetails(result));
         }
         setData(watchedData);
