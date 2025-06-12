@@ -1,9 +1,12 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import MovieCard from './MovieCard';
 import {parseMovieData, parseMovieDetails, compareDates} from '../utils/utils.js';
+import {LikeContext} from "../App.jsx"
 
-function Liked({setModal, setIsModalOpen, isModalOpen, sort, liked, setLiked, watched, setWatched}){
+function Liked({setModal, setIsModalOpen, isModalOpen, sort}){
     const [data, setData] = useState([]); //what will show in MovieCards
+    const likeContext = useContext(LikeContext);
+    const liked = likeContext.liked;
 
     //initial load
     useEffect(() => {
@@ -73,8 +76,7 @@ function Liked({setModal, setIsModalOpen, isModalOpen, sort, liked, setLiked, wa
     <>
         <div className="movie-card-container">
         {data.map((movie, index) => (
-            <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}
-            liked={liked} setLiked={setLiked} watched={watched} setWatched={setWatched}/>
+            <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}/>
         ))}
         {liked.length === 0 && <p>Nothing liked yet!</p>}
         </div>

@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import { parseMovieData , parseMovieDetails, compareDates} from '../utils/utils';
 import MovieCard from './MovieCard';
 
-function MovieList({setModal, setIsModalOpen, isModalOpen, sort, liked, setLiked, watched, setWatched}){
+function MovieList({setModal, setIsModalOpen, isModalOpen, sort, watched, setWatched}){
     const [data, setData] = useState([]); //what will show in MovieCards
     const [search, setSearch] = useState('');
     const [pageIdx, setPageIdx] = useState(1);
@@ -135,8 +135,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, liked, setLiked
         </form>
         <div className="movie-card-container">
         {data.map((movie, index) => (
-            <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}
-            liked={liked} setLiked={setLiked} watched={watched} setWatched={setWatched}/>
+            <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}/>
         ))}
         </div>
         <button onClick={HandleLoadMore}>Load More</button>
