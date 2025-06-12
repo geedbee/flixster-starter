@@ -14,7 +14,6 @@ function Modal({modalInfo, setModal, setIsModalOpen}){
                 Authorization: `Bearer ${apiKey}`
             }
         };
-
         const response = await fetch(`https://api.themoviedb.org/3/movie/${modalInfo.id}/videos?language=en-US`, options);
         const result = await response.json();
         const trailer = result.results.find(video => video.type === 'Trailer');

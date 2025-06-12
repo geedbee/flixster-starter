@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import { parseMovieData , parseMovieDetails, handleSort} from '../utils/utils';
+import { parseMovieData , parseMovieDetails, handleSort, getMovieDetails} from '../utils/utils';
 import MovieCard from './MovieCard';
 
 function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
@@ -21,16 +21,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort}){
         }
     }, [isModalOpen]);
     async function populateModal(){
-        const apiKey = import.meta.env.VITE_API_KEY;
-        const options = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${apiKey}`
-            }
-        };
-        const response = await fetch(`https://api.themoviedb.org/3/movie/${modalId}`, options);
-        const result = await response.json();
+        const result = await getMovieDetails(modalId);
         setModal(parseMovieDetails(result));
     }
 

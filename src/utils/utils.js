@@ -72,4 +72,21 @@ function handleSort(sort, data){
     }
 }
 
-export {parseMovieData, parseMovieDetails, convertRuntime, convertReleaseDate, compareDates, handleSort}
+
+//API CALLS
+//input: id returns: result (object)
+async function getMovieDetails(id){
+    const apiKey = import.meta.env.VITE_API_KEY;
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${apiKey}`
+        }
+    };
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}`, options);
+    const result = await response.json();
+    return result;
+}
+
+export {parseMovieData, parseMovieDetails, convertRuntime, convertReleaseDate, compareDates, handleSort, getMovieDetails}
