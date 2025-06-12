@@ -3,16 +3,19 @@
   flex-direction: column;
   justify-content: center;
   width: 80%;
-  height: 500px;
+  height: 50vh;
   background-color: white;
   border-radius: 15px;
   overflow: hidden;
 }
 
-.movie-card:hover{
+.movie-card-img:hover{
     filter: brightness(50%);
 }
 
+.movie-card-title {
+    margin: 10px;
+}
 .movie-card-img {
     height: 100%;
     width: 100%;
@@ -20,6 +23,15 @@
     object-position: center;
 }
 
-.like-btn {
-    
+.movie-card-body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.watch-btn, .like-btn {
+    width: 50px;
+    height: 50px;
+    background: none;
+    border: none;
 }

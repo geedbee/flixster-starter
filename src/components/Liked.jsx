@@ -76,6 +76,7 @@ function Liked({setModal, setIsModalOpen, isModalOpen, sort, liked, setLiked, wa
             <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}
             liked={liked} setLiked={setLiked} watched={watched} setWatched={setWatched}/>
         ))}
+        {liked.length === 0 && <p>Nothing liked yet!</p>}
         </div>
     </>
     );

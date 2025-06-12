@@ -76,6 +76,7 @@ function Watched({setModal, setIsModalOpen, isModalOpen, sort, liked, setLiked, 
             <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}
             liked={liked} setLiked={setLiked} watched={watched} setWatched={setWatched}/>
         ))}
+        {watched.length === 0 && <p>Nothing watched yet!</p>}
         </div>
     </>
     );
