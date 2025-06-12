@@ -1,14 +1,22 @@
 import "../MovieCard.css"
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { MdOutlineStarRate } from "react-icons/md";
+import {LikeContext} from "../App.jsx"
+import { WatchedContext } from "../App.jsx";
 
-function MovieCard({id, title, img, voteAvg, setModalId, setIsModalOpen, liked, setLiked, watched, setWatched}){
+function MovieCard({id, title, img, voteAvg, setModalId, setIsModalOpen}){
     const [isLiked, setIsLiked] = useState(false);
     const [isWatched, setIsWatched] = useState(false);
+    const likeContext = useContext(LikeContext);
+    const liked = likeContext.liked;
+    const setLiked = likeContext.setLiked;
+    const watchContext = useContext(WatchedContext);
+    const watched = watchContext.watched;
+    const setWatched = watchContext.setWatched;
 
     function HandleLiked(e){
         e.stopPropagation();

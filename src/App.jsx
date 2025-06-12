@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect , createContext} from 'react'
 import './App.css'
 import MovieList from './components/MovieList'
 import Modal from './components/Modal'
@@ -6,6 +6,9 @@ import Sidebar from './components/Sidebar'
 import Liked from './components/Liked'
 import Watched from './components/Watched'
 import { MdMovieFilter } from "react-icons/md";
+
+export const LikeContext = createContext();
+export const WatchedContext = createContext();
 
 const App = () => {
   //modal handling
@@ -39,10 +42,6 @@ const App = () => {
     }
   }
 
-  useEffect(() => {
-    console.log(liked);
-    console.log(watched);
-  }, [liked, watched]);
 
   return (
     <div className="App">
@@ -60,12 +59,13 @@ const App = () => {
         </div>
       </header>
       <main>
-        {pageIdx === 0 && <MovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort} liked={liked} setLiked={setLiked}
-        watched={watched} setWatched={setWatched}/>}
-        {pageIdx === 1 && <Liked setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort} liked={liked} setLiked={setLiked}
-        watched={watched} setWatched={setWatched}/>}
-        {pageIdx === 2 && <Watched setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort} liked={liked} setLiked={setLiked}
-        watched={watched} setWatched={setWatched}/>}
+        <WatchedContext.Provider value={{watched, setWatched}}>
+        <LikeContext.Provider value={{liked, setLiked}}>
+          {pageIdx === 0 && <MovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
+          {pageIdx === 1 && <Liked setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
+          {pageIdx === 2 && <Watched setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
+        </LikeContext.Provider>
+        </WatchedContext.Provider>
       </main>
       <footer>Flixster {new Date().getFullYear()}</footer>
     </div>
