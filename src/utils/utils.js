@@ -57,4 +57,19 @@ const compareDates = function compareDates(a, b){
     return date2 - date1;
 }
 
-export {parseMovieData, parseMovieDetails, convertRuntime, convertReleaseDate, compareDates}
+function handleSort(sort, data){
+    if (sort != 'none'){
+        let dataCpy = [...data];
+        if (sort === 'name'){
+            return dataCpy.sort((a, b) => a.title.localeCompare(b.title));
+        }
+        else if (sort === 'votes'){
+            return dataCpy.sort((a, b) => b.voteAvg - a.voteAvg);
+        }
+        else if (sort === 'dates'){
+            return dataCpy.sort((a, b) => compareDates(a.releaseDate, b.releaseDate));
+        }
+    }
+}
+
+export {parseMovieData, parseMovieDetails, convertRuntime, convertReleaseDate, compareDates, handleSort}

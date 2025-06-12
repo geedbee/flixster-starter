@@ -1,6 +1,7 @@
 import { IoMenuSharp } from "react-icons/io5";
 import { useState } from "react";
 import '../Sidebar.css'
+import {Page} from "../App"
 
 function Sidebar({pageIdx, setPageIdx}){
     const [isOpen, setIsOpen] = useState(false);
@@ -18,9 +19,9 @@ function Sidebar({pageIdx, setPageIdx}){
         <div className='sidebar-container'>
             <button onClick={OpenMenu}><IoMenuSharp/></button>
             {isOpen && <div className='sidebar-body'>
-                <button onClick={() => HandleClick(0)}>Home</button>
-                <button onClick={() => HandleClick(1)}>Liked</button>
-                <button onClick={() => HandleClick(2)}>Watched</button>
+                <button onClick={() => HandleClick(Page.Home)}>Home</button>
+                <button onClick={() => HandleClick(Page.Liked)}>Liked</button>
+                <button onClick={() => HandleClick(Page.Watched)}>Watched</button>
             </div>}
         </div>
     </>);

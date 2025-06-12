@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext} from 'react';
 import MovieCard from './MovieCard';
-import {parseMovieData, parseMovieDetails, compareDates} from '../utils/utils.js';
+import {parseMovieData, parseMovieDetails, handleSort} from '../utils/utils.js';
 import {LikeContext} from "../App.jsx"
 
 function Liked({setModal, setIsModalOpen, isModalOpen, sort}){
@@ -37,16 +37,7 @@ function Liked({setModal, setIsModalOpen, isModalOpen, sort}){
     //sort handling
     useEffect(() => {
         if (sort != 'none'){
-            let dataCpy = [...data];
-            if (sort === 'name'){
-                setData(dataCpy.sort((a, b) => a.title.localeCompare(b.title)));
-            }
-            else if (sort === 'votes'){
-                setData(dataCpy.sort((a, b) => b.voteAvg - a.voteAvg));
-            }
-            else if (sort === 'dates'){
-                setData(dataCpy.sort((a, b) => compareDates(a.releaseDate, b.releaseDate)));
-            }
+            setData(handleSort(sort, data));
         }
     }, [sort]);
 

@@ -9,7 +9,7 @@ import { MdMovieFilter } from "react-icons/md";
 
 export const LikeContext = createContext();
 export const WatchedContext = createContext();
-const Page = {
+export const Page = {
   Home: 0,
   Liked: 1,
   Watched: 2
