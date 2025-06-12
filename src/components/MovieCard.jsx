@@ -4,7 +4,7 @@ import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
-
+import { MdOutlineStarRate } from "react-icons/md";
 
 function MovieCard({id, title, img, voteAvg, setModalId, setIsModalOpen, liked, setLiked, watched, setWatched}){
     const [isLiked, setIsLiked] = useState(false);
@@ -53,12 +53,14 @@ function MovieCard({id, title, img, voteAvg, setModalId, setIsModalOpen, liked, 
     return(
     <div className="movie-card" onClick={() => (setModalId(id), setIsModalOpen(true))}>
         <img className="movie-card-img" src={`https://image.tmdb.org/t/p/w500${img}`} alt={title} />
-        <p>{title}</p>
-        <p>{voteAvg}</p>
-        {isLiked ? <button onClick={HandleLiked} className="like-btn"><FaHeart/></button>
-        : <button onClick={HandleLiked} className="like-btn"><FaRegHeart/></button>}
-        {isWatched ? <button onClick={HandleWatched} className="like-btn"><FaEye/></button>
-        : <button onClick={HandleWatched} className="like-btn"><FaRegEye/></button>}
+        <h3 className="movie-card-title">{title}</h3>
+        <div className="movie-card-body">
+            {isLiked ? <button onClick={HandleLiked} className="like-btn"><FaHeart/></button>
+            : <button onClick={HandleLiked} className="like-btn"><FaRegHeart/></button>}
+            <p><MdOutlineStarRate/>{voteAvg}</p>
+            {isWatched ? <button onClick={HandleWatched} className="like-btn"><FaEye/></button>
+            : <button onClick={HandleWatched} className="like-btn"><FaRegEye/></button>}
+        </div>
     </div>
     );
 }

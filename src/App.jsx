@@ -5,6 +5,7 @@ import Modal from './components/Modal'
 import Sidebar from './components/Sidebar'
 import Liked from './components/Liked'
 import Watched from './components/Watched'
+import { MdMovieFilter } from "react-icons/md";
 
 const App = () => {
   //modal handling
@@ -48,7 +49,7 @@ const App = () => {
       {isModalOpen && modal && <Modal modalInfo={modal} setModal={setModal} setIsModalOpen={setIsModalOpen}></Modal>}
       <Sidebar pageIdx={pageIdx} setPageIdx={setPageIdx}></Sidebar>
       <header className="App-header">
-        <h1>Flixster</h1>
+        <h1><MdMovieFilter />Flixster</h1>
         <div className="sort-bar">
             <select name="sort" onChange={HandleSort}>
                 <option value="none">Sort By</option>
