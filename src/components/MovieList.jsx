@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import { parseMovieData , parseMovieDetails, handleSort, getMovieDetails} from '../utils/utils';
 import MovieCard from './MovieCard';
 
-function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPageIdx, search, setSearch, isSearch, setIsSearch}){
+function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPageIdx, search, isSearch}){
     const [data, setData] = useState([]); //what will show in MovieCards
 
     //initial load

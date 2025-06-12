@@ -5,7 +5,7 @@
   height: 100vh;
 }
 .App-header {
-  height: 15vh;
+  height: 10vh;
   justify-content: center;
   position: fixed;
   z-index: 1;
@@ -14,17 +14,17 @@
   border-radius: 15px;
   backdrop-filter: blur(30px);
   box-shadow: 1px 5px 20px 1px lightgrey;
+  display: flex;
+  align-items: center;
 }
 main {
   padding-top: 15vh;
 }
-.sort-bar {
-  background-color: transparent !important;
-}
-.sort-bar select {
-  background-color: rgba(255, 255, 255, 0.5);
+.sort-bar select, .search-bar input {
+  background-color: white;
   border-radius: 5px;
   padding: 5px;
+  border: 1px solid black;
 }
 .App-header h1 {
   font-family: "Pixelify Sans", sans-serif;
@@ -89,6 +89,7 @@ footer{
   .movie-card-container {
     display: grid;
     justify-items: center;
+    gap: 10px;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 }

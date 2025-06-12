@@ -5,69 +5,65 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { MdOutlineStarRate } from "react-icons/md";
-import {LikeContext} from "../App.jsx"
-import { WatchedContext } from "../App.jsx";
+import {LikedWatchedContext} from "../App.jsx"
 
 function MovieCard({id, title, img, voteAvg, setModalId, setIsModalOpen}){
     const [isLiked, setIsLiked] = useState(false);
     const [isWatched, setIsWatched] = useState(false);
-    const likeContext = useContext(LikeContext);
-    const liked = likeContext.liked;
-    const setLiked = likeContext.setLiked;
-    const watchContext = useContext(WatchedContext);
-    const watched = watchContext.watched;
-    const setWatched = watchContext.setWatched;
+    const context = useContext(LikedWatchedContext);
+    const likedList = context.likedList;
+    const setLiked = context.setLikedList;
+    const watchedList = context.watchedList;
+    const setWatched = context.setWatchedList;
 
     function HandleLiked(e){
         e.stopPropagation();
-        if (liked && liked.includes(id)){
-            setLiked(liked.filter(item => item !== id));
+        if (likedList && likedList.includes(id)){
+            setLiked(likedList.filter(item => item !== id));
             setIsLiked(false);
         }
         else{
-            setLiked([...liked, id]);
+            setLiked([...likedList, id]);
             setIsLiked(true);
         }
     }
     function HandleWatched(e){
         e.stopPropagation();
-        if (watched && watched.includes(id)){
-            setWatched(watched.filter(item => item !== id));
+        if (watchedList && watchedList.includes(id)){
+            setWatched(watchedList.filter(item => item !== id));
             setIsWatched(false);
         }
         else{
-            setWatched([...watched, id]);
+            setWatched([...watchedList, id]);
             setIsWatched(true);
         }
     }
 
     useEffect(() =>{
-        if (liked && liked.includes(id)){
+        if (likedList && likedList.includes(id)){
             setIsLiked(true);
         }
         else {
             setIsLiked(false);
         }
-    }, [liked, id]);
+    }, [likedList, id]);
     useEffect(() =>{
-        if (watched && watched.includes(id)){
+        if (watchedList && watchedList.includes(id)){
             setIsWatched(true);
         }
         else {
             setIsWatched(false);
         }
-    }, [watched, id]);
+    }, [watchedList, id]);
 
     return(
     <div className="movie-card" onClick={() => (setModalId(id), setIsModalOpen(true))}>
         <img className="movie-card-img" src={`https://image.tmdb.org/t/p/w500${img}`} alt={title} />
         <h3 className="movie-card-title">{title}</h3>
         <div className="movie-card-body">
-            {isLiked ? <button onClick={HandleLiked} className="like-btn"><FaHeart/></button>
-            : <button onClick={HandleLiked} className="like-btn"><FaRegHeart/></button>}
+            {<button onClick={HandleLiked} className="like-btn">{isLiked ? <FaHeart/> : <FaRegHeart/>}</button>}
             <p><MdOutlineStarRate/>{voteAvg}</p>
-            {isWatched ? <button onClick={HandleWatched} className="like-btn"><FaEye/></button>
-            : <button onClick={HandleWatched} className="like-btn"><FaRegEye/></button>}
+            {<button onClick={HandleWatched} className="watch-btn">{isWatched? <FaEye/> : <FaRegEye/>}</button>}
         </div>
     </div>
     );

@@ -1,13 +1,12 @@
 import {useState, useEffect, useContext} from 'react';
 import MovieCard from './MovieCard';
 import {parseMovieData, parseMovieDetails, compareDates, handleSort, getMovieDetails} from '../utils/utils.js';
-import { WatchedContext } from "../App.jsx";
+import { LikedWatchedContext} from "../App.jsx";
 
 function Watched({setModal, setIsModalOpen, isModalOpen, sort}){
     const [data, setData] = useState([]); //what will show in MovieCards
-    const watchContext = useContext(WatchedContext);
-    const watched = watchContext.watched;
-    const setWatched = watchContext.setWatched;
+    const watchContext = useContext(LikedWatchedContext);
+    const watched = watchContext.watchedList;
 
     //initial load
     useEffect(() => {
@@ -55,8 +54,7 @@ function Watched({setModal, setIsModalOpen, isModalOpen, sort}){
     <>
         <div className="movie-card-container">
         {data.map((movie, index) => (
-            <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}
-            watched={watched} setWatched={setWatched}/>
+            <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}/>
         ))}
         {watched.length === 0 && <p>Nothing watched yet!</p>}
         </div>
