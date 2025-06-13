@@ -95,4 +95,16 @@ async function getMovieDetails(id){
     return result;
 }
 
-export {parseMovieData, parseMovieDetails, convertRuntime, convertReleaseDate, compareDates, handleSort, getMovieDetails}
+function getOptions(){
+    const apiKey = import.meta.env.VITE_API_KEY;
+    const options = {
+        method: 'GET',
+        headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${apiKey}`
+        }
+    };
+    return options;
+}
+
+export {parseMovieData, parseMovieDetails, convertRuntime, convertReleaseDate, compareDates, handleSort, getMovieDetails, getOptions}
