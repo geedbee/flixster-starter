@@ -100,7 +100,7 @@ Deployed Application (**required**): https://flixster-n2fs.onrender.com
 
 ### Walkthrough Video
 
-
+https://www.loom.com/share/df137e0c9490474784b1d4ed899d0dbb?sid=b7dce314-b814-42c4-80ca-ae5103402bea
 
 ### Reflection
 
