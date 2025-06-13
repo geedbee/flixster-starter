@@ -9,11 +9,10 @@
   justify-content: center;
   position: fixed;
   z-index: 1;
-  background-color: transparent;
+  background-color: rgba(255,255,255,.2);
   width: 100vw;
   border-radius: 15px;
   backdrop-filter: blur(30px);
-  box-shadow: 1px 5px 20px 1px lightgrey;
   display: flex;
   align-items: center;
 }
@@ -25,6 +24,7 @@ main {
   border-radius: 5px;
   padding: 5px;
   border: 1px solid black;
+  font-family: 'Lexend', sans-serif;
 }
 .App-header h1 {
   font-family: "Pixelify Sans", sans-serif;
@@ -33,6 +33,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 main {
   margin-left: 100px;
@@ -41,9 +42,12 @@ main {
   height: 82vh;
 }
 footer{
-  background-color: #282c34;
+  background-color: white;
   height: 3vh;
-  color: white;
+  color: var(--color-1);
+}
+.error-msg {
+  color:white;
 }
 
 @media (min-width: 375px) {
@@ -89,7 +93,7 @@ footer{
   .movie-card-container {
     display: grid;
     justify-items: center;
-    gap: 10px;
+    row-gap: 10px;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 }

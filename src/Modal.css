@@ -30,6 +30,13 @@ ul {
     margin-left: none;
     padding: 0;
 }
+.close-modal{
+    float: right;
+    background: none;
+    color: var(--color-1);
+    font-size: 20px;
+    padding: 5px;
+}
 
 .modal-image{
     width: 80%;

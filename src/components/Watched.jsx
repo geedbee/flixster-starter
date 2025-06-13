@@ -56,7 +56,7 @@ function Watched({setModal, setIsModalOpen, isModalOpen, sort}){
         {data.map((movie, index) => (
             <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}/>
         ))}
-        {watched.length === 0 && <p>Nothing watched yet!</p>}
+        {watched.length === 0 && <p className='error-msg'>Nothing watched yet!</p>}
         </div>
     </>
     );

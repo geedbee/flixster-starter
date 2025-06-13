@@ -8,6 +8,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPag
     //initial load
     useEffect(() => {
         fetchNewMovieData(true);
+        setPageIdx(1);
     }, []);
 
     //modal handling
@@ -94,11 +95,12 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPag
     return(
     <>
         <div className="movie-card-container">
+        {data.length === 0 && <p className='error-msg'>No search results</p>}
         {data.map((movie, index) => (
             <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}/>
         ))}
         </div>
-        <button onClick={HandleLoadMore}>Load More</button>
+        {data.length > 0 && <button onClick={HandleLoadMore}>Load More</button>}
     </>
     );
 }

@@ -6,4 +6,15 @@
 }
 
 .sidebar-body {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-3);
+}
+
+.sidebar-menu-btn {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2rem;
 }

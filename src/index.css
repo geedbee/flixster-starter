@@ -1,7 +1,13 @@
+:root {
+  --color-1: #001845;
+  --color-2: #33415c;
+  --color-3: #0466c8;
+}
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: white;
+  background-image: linear-gradient(var(--color-1), black);
+  font-family: "Lexend", sans-serif;
 }
 
 .pixelify-sans-400 {
@@ -9,4 +15,21 @@ body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+}
+
+.lexend-300 {
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+button {
+  background-color: var(--color-3);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  height: 2rem;
+  font-family: "Lexend", sans-serif;
+  margin: 1px;
 }

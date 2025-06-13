@@ -93,7 +93,7 @@ const App = () => {
           {pageIdx === Page.Watched && <Watched setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
         </LikedWatchedContext.Provider>
       </main>
-      <footer>Flixster {new Date().getFullYear()}</footer>
+      <footer>Flixster ©{new Date().getFullYear()}</footer>
     </div>
   )
 }
