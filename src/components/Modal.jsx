@@ -1,6 +1,7 @@
 import "../Modal.css"
 import {convertRuntime, convertReleaseDate} from "../utils/utils.js"
 import {useState, useEffect} from "react";
+import { RxCross1 } from "react-icons/rx";
 
 function Modal({modalInfo, setModal, setIsModalOpen}){
     const [trailerKey, setTrailerKey] = useState(null);
@@ -28,8 +29,9 @@ function Modal({modalInfo, setModal, setIsModalOpen}){
         <div className='modal'>
             <div className='modal-content'>
                 <div className='modal-body'>
-                <img className='modal-image' src={`https://image.tmdb.org/t/p/w780${modalInfo.img}`} alt={modalInfo.title} />
+                    <img className='modal-image' src={`https://image.tmdb.org/t/p/w780${modalInfo.img}`} alt={modalInfo.title} />
                     <div className='modal-info'>
+                        <button className='close-modal' onClick={() => (setModal(null), setIsModalOpen(false))}><RxCross1 /></button>
                         <h2>{modalInfo.title}</h2>
                         <p>{modalInfo.overview}</p>
                         <p>Runtime: {convertRuntime(modalInfo.runtime)}</p>
@@ -40,7 +42,6 @@ function Modal({modalInfo, setModal, setIsModalOpen}){
                         {trailerKey && <iframe width="560" height="315" src={`https://www.youtube.com/embed/${trailerKey}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>}
                     </div>
                 </div>
-                <button className='close-modal' onClick={() => (setModal(null), setIsModalOpen(false))}>Close</button>
             </div>
         </div>
     );
