@@ -55,6 +55,7 @@ const App = () => {
   }
   function HandleSearchChange(event){
       setSearch(event.target.value);
+      setIsSearch(false);
   }
   function HandleClear(){
       setSearch('');
