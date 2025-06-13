@@ -1,5 +1,5 @@
 import {useState, useEffect, useContext} from 'react';
-import { parseMovieData , parseMovieDetails, handleSort, getMovieDetails} from '../utils/utils';
+import { parseMovieData , parseMovieDetails, handleSort, getMovieDetails, getOptions} from '../utils/utils';
 import MovieCard from './MovieCard';
 import "../MovieList.css"
 import {Sort} from "../App.jsx"
@@ -13,7 +13,7 @@ function MovieList({search, isSearch, sort, pageIdx, setPageIdx}){
     const isModalOpen = context.isModalOpen;
     //initial load
     useEffect(() => {
-        fetchNewMovieData();
+        fetchData();
         setPageIdx(1);
     }, []);
 
@@ -38,39 +38,10 @@ function MovieList({search, isSearch, sort, pageIdx, setPageIdx}){
 
     //fetching data
     //SEARCH API
-    const fetchSearchData = async () => {
-        const apiKey = import.meta.env.VITE_API_KEY;
-        const options = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${apiKey}`
-            }
-          };
-        const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=${pageIdx}`, options);
-        if (!response.ok) {
-            throw new Error('Failed to fetch movie list data');
-        }
-        //if it is the first page, we want to reset the data
-        const result = await response.json();
-        if (pageIdx === 1){
-            setData(parseMovieData(result.results));
-        }
-        else{
-            setData([...data, ...parseMovieData(result.results)]);
-        }
-    }
-    //NOW PLAYING API
-    const fetchNewMovieData = async () => {
-        const apiKey = import.meta.env.VITE_API_KEY;
-        const options = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${apiKey}`
-            }
-          };
-        const response = await fetch(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageIdx}`, options)
+    const fetchData = async () => {
+        const options = getOptions();
+        const url = search !== '' ? `https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=${pageIdx}` : `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageIdx}`;
+        const response = await fetch(url, options)
         if (!response.ok) {
             throw new Error('Failed to fetch movie list data');
         }
@@ -92,10 +63,10 @@ function MovieList({search, isSearch, sort, pageIdx, setPageIdx}){
     }
     useEffect(() => {
         if (isSearch){
-            fetchSearchData();
+            fetchData();
         }
         else{
-            fetchNewMovieData();
+            fetchData();
         }
     }, [pageIdx, isSearch]);
 

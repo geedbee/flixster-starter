@@ -1,5 +1,5 @@
 import "../Modal.css"
-import {convertRuntime, convertReleaseDate} from "../utils/utils.js"
+import {convertRuntime, convertReleaseDate, getOptions} from "../utils/utils.js"
 import {useState, useEffect} from "react";
 import { RxCross1 } from "react-icons/rx";
 
@@ -7,14 +7,7 @@ function Modal({modalInfo, setModal, setIsModalOpen}){
     const [trailerKey, setTrailerKey] = useState(null);
 
     async function fetchTrailer(){
-        const apiKey = import.meta.env.VITE_API_KEY;
-        const options = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${apiKey}`
-            }
-        };
+        const options = getOptions();
         const response = await fetch(`https://api.themoviedb.org/3/movie/${modalInfo.id}/videos?language=en-US`, options);
         const result = await response.json();
         const trailer = result.results.find(video => video.type === 'Trailer');
