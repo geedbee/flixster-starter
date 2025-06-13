@@ -3,6 +3,7 @@ import { parseMovieData , parseMovieDetails, handleSort, getMovieDetails} from '
 import MovieCard from './MovieCard';
 import {LikedWatchedSearchContext} from "../App.jsx"
 import "../MovieList.css"
+import {Sort} from "../App.jsx"
 
 function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPageIdx}){
     const [data, setData] = useState([]); //what will show in MovieCards
@@ -29,7 +30,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPag
 
     //sort handling
     useEffect(() => {
-        if (sort != 'none'){
+        if (sort != Sort.none){
             setData(handleSort(sort, data));
         }
     }, [sort]);

@@ -1,7 +1,7 @@
 import { IoMenuSharp } from "react-icons/io5";
 import { useState } from "react";
 import '../Sidebar.css'
-import {Page} from "../App"
+import {Page} from "../App.jsx"
 
 function Sidebar({pageIdx, setPageIdx}){
     const [isOpen, setIsOpen] = useState(false);

@@ -2,6 +2,7 @@ import {useState, useEffect, useContext} from 'react';
 import MovieCard from './MovieCard';
 import {parseMovieDetails, handleSort, getMovieDetails} from '../utils/utils.js';
 import { LikedWatchedSearchContext} from "../App.jsx";
+import {Sort} from "../App.jsx"
 
 function Watched({setModal, setIsModalOpen, isModalOpen, sort}){
     const [data, setData] = useState([]); //what will show in MovieCards
@@ -27,8 +28,8 @@ function Watched({setModal, setIsModalOpen, isModalOpen, sort}){
 
     //sort handling
     useEffect(() => {
-        if (sort != 'none'){
-            handleSort(sort, data);
+        if (sort != Sort.none){
+            setData(handleSort(sort, data));
         }
     }, [sort]);
 
