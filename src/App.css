@@ -42,7 +42,7 @@ main {
 }
 .search-bar form button{
   height: 90%;
-  
+
 }
 .App-header h1 {
   font-family: "Pixelify Sans", sans-serif;
@@ -68,18 +68,24 @@ footer{
   color:white;
 }
 
+.movie-card-container {
+  display: grid;
+  justify-items: center;
+  row-gap: 10px;
+  grid-template-columns: 1fr;
+}
 @media (min-width: 375px) {
   .movie-card-container {
     display: grid;
     justify-items: center;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 @media (min-width: 576px) {
   .movie-card-container {
     display: grid;
     justify-items: center;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -87,7 +93,7 @@ footer{
   .movie-card-container {
     display: grid;
     justify-items: center;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
@@ -95,7 +101,7 @@ footer{
   .movie-card-container {
     display: grid;
     justify-items: center;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 
@@ -103,7 +109,7 @@ footer{
   .movie-card-container {
     display: grid;
     justify-items: center;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 }
 
