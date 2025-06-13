@@ -5,11 +5,10 @@ import "../MovieList.css"
 import {Sort} from "../App.jsx"
 import { AllContext } from '../App.jsx';
 
-function MovieList({search, isSearch, sort, pageIdx, setPageIdx}){
+function MovieList({query, sort, pageIdx, setPageIdx}){
     const [data, setData] = useState([]); //what will show in MovieCards
     const context = useContext(AllContext);
     const setModal = context.setModal;
-    const setIsModalOpen = context.setIsModalOpen;
     const isModalOpen = context.isModalOpen;
     //initial load
     useEffect(() => {
@@ -40,7 +39,7 @@ function MovieList({search, isSearch, sort, pageIdx, setPageIdx}){
     //SEARCH API
     const fetchData = async () => {
         const options = getOptions();
-        const url = search !== '' ? `https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=${pageIdx}` : `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageIdx}`;
+        const url = query !== '' ? `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${pageIdx}` : `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageIdx}`;
         const response = await fetch(url, options)
         if (!response.ok) {
             throw new Error('Failed to fetch movie list data');
@@ -62,13 +61,13 @@ function MovieList({search, isSearch, sort, pageIdx, setPageIdx}){
         setPageIdx(pageIdx + 1);
     }
     useEffect(() => {
-        if (isSearch){
+        if (query !== ''){
             fetchData();
         }
         else{
             fetchData();
         }
-    }, [pageIdx, isSearch]);
+    }, [pageIdx, query]);
 
 
     return(

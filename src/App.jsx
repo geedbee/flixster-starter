@@ -44,19 +44,19 @@ const App = () => {
   //handle search
   const [search, setSearch] = useState('');
   const [moviePageIdx, setMoviePageIdx] = useState(1);
-  const [isSearch, setIsSearch] = useState(false);
+  const [query, setQuery] = useState('');
   function HandleSearch(event){
       event.preventDefault();
-      setIsSearch(true);
+      setQuery(search);
       setMoviePageIdx(1);
   }
   function HandleSearchChange(event){
       setSearch(event.target.value);
-      setIsSearch(false);
+      setQuery('');
   }
   function HandleClear(){
       setSearch('');
-      setIsSearch(false);
+      setQuery('');
       setMoviePageIdx(1);
   }
 
@@ -90,8 +90,7 @@ const App = () => {
       </header>
       <main>
         <AllContext.Provider value={{watchedList, setWatchedList, likedList, setLikedList, setModal, isModalOpen, setIsModalOpen}}>
-          {pageIdx === Page.Home && <MovieList sort={sort}
-          pageIdx={moviePageIdx} setPageIdx={setMoviePageIdx} search={search} isSearch={isSearch}/>}
+          {pageIdx === Page.Home && <MovieList sort={sort} pageIdx={moviePageIdx} setPageIdx={setMoviePageIdx} query={query}/>}
           {pageIdx === Page.Liked && <Liked sort={sort}/>}
           {pageIdx === Page.Watched && <Watched sort={sort}/>}
         </AllContext.Provider>
