@@ -5,16 +5,17 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { MdOutlineStarRate } from "react-icons/md";
-import {LikedWatchedSearchContext} from "../App.jsx"
+import {AllContext} from "../App.jsx"
 
-function MovieCard({id, title, img, voteAvg, setModalId, setIsModalOpen}){
+function MovieCard({id, title, img, voteAvg, setModalId}){
     const [isLiked, setIsLiked] = useState(false);
     const [isWatched, setIsWatched] = useState(false);
-    const context = useContext(LikedWatchedSearchContext);
+    const context = useContext(AllContext);
     const likedList = context.likedList;
     const setLiked = context.setLikedList;
     const watchedList = context.watchedList;
     const setWatched = context.setWatchedList;
+    const setIsModalOpen = context.setIsModalOpen;
 
     function HandleLiked(e){
         e.stopPropagation();

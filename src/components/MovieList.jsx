@@ -1,18 +1,19 @@
 import {useState, useEffect, useContext} from 'react';
 import { parseMovieData , parseMovieDetails, handleSort, getMovieDetails} from '../utils/utils';
 import MovieCard from './MovieCard';
-import {LikedWatchedSearchContext} from "../App.jsx"
 import "../MovieList.css"
 import {Sort} from "../App.jsx"
+import { AllContext } from '../App.jsx';
 
-function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPageIdx}){
+function MovieList({search, isSearch, sort, pageIdx, setPageIdx}){
     const [data, setData] = useState([]); //what will show in MovieCards
-    const context = useContext(LikedWatchedSearchContext);
-    const search = context.search;
-    const isSearch = context.isSearch;
+    const context = useContext(AllContext);
+    const setModal = context.setModal;
+    const setIsModalOpen = context.setIsModalOpen;
+    const isModalOpen = context.isModalOpen;
     //initial load
     useEffect(() => {
-        fetchNewMovieData(true);
+        fetchNewMovieData();
         setPageIdx(1);
     }, []);
 
@@ -37,7 +38,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPag
 
     //fetching data
     //SEARCH API
-    const fetchSearchData = async (isFirst) => {
+    const fetchSearchData = async () => {
         const apiKey = import.meta.env.VITE_API_KEY;
         const options = {
             method: 'GET',
@@ -52,7 +53,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPag
         }
         //if it is the first page, we want to reset the data
         const result = await response.json();
-        if (isFirst){
+        if (pageIdx === 1){
             setData(parseMovieData(result.results));
         }
         else{
@@ -60,7 +61,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPag
         }
     }
     //NOW PLAYING API
-    const fetchNewMovieData = async (isFirst) => {
+    const fetchNewMovieData = async () => {
         const apiKey = import.meta.env.VITE_API_KEY;
         const options = {
             method: 'GET',
@@ -75,7 +76,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPag
         }
         //if it is the first page, we want to reset the data
         const result = await response.json();
-        if (isFirst){
+        if (pageIdx === 1){
             setData(parseMovieData(result.results));
         }
         else{
@@ -91,10 +92,10 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPag
     }
     useEffect(() => {
         if (isSearch){
-            fetchSearchData(pageIdx === 1);
+            fetchSearchData();
         }
         else{
-            fetchNewMovieData(pageIdx === 1);
+            fetchNewMovieData();
         }
     }, [pageIdx, isSearch]);
 
@@ -104,7 +105,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPag
         <section className="movie-card-container">
         {data.length === 0 && <p className='error-msg'>No search results</p>}
         {data.map((movie, index) => (
-            <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}/>
+            <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId}/>
         ))}
         </section>
         {data.length > 0 && <button className='load-more-btn' onClick={HandleLoadMore}>Load More</button>}
