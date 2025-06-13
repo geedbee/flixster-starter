@@ -19,9 +19,12 @@ function Sidebar({pageIdx, setPageIdx}){
         <nav className='sidebar-container'>
             <button className='sidebar-menu-btn' onClick={OpenMenu}><IoMenuSharp/></button>
             {isOpen && <div className='sidebar-body'>
-                <button onClick={() => HandleClick(Page.Home)}>Home</button>
-                <button onClick={() => HandleClick(Page.Liked)}>Liked</button>
-                <button onClick={() => HandleClick(Page.Watched)}>Watched</button>
+                {pageIdx === Page.Home ? <button className='sidebar-dropdown blue' onClick={() => HandleClick(Page.Home)}>Home</button> :
+                <button className='sidebar-dropdown' onClick={() => HandleClick(Page.Home)}>Home</button>}
+                {pageIdx === Page.Liked ? <button className='sidebar-dropdown blue' onClick={() => HandleClick(Page.Liked)}>Liked</button> :
+                <button className='sidebar-dropdown' onClick={() => HandleClick(Page.Liked)}>Liked</button>}
+                {pageIdx === Page.Watched ? <button className='sidebar-dropdown blue' onClick={() => HandleClick(Page.Watched)}>Watched</button> :
+                <button className='sidebar-dropdown' onClick={() => HandleClick(Page.Watched)}>Watched</button>}
             </div>}
         </nav>
     </>);

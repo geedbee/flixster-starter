@@ -2,6 +2,7 @@ import {useState, useEffect, useContext} from 'react';
 import { parseMovieData , parseMovieDetails, handleSort, getMovieDetails} from '../utils/utils';
 import MovieCard from './MovieCard';
 import {LikedWatchedSearchContext} from "../App.jsx"
+import "../MovieList.css"
 
 function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPageIdx}){
     const [data, setData] = useState([]); //what will show in MovieCards
@@ -77,7 +78,9 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPag
             setData(parseMovieData(result.results));
         }
         else{
-            setData([...data, ...parseMovieData(result.results)]);
+            let newData = parseMovieData(result.results);
+            newData = newData.filter(movie => !data.some(dataMovie => dataMovie.id === movie.id));
+            setData([...data, ...newData]);
         }
     }
 
@@ -103,7 +106,7 @@ function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPag
             <MovieCard key={index} id={movie.id} title={movie.title} img={movie.img} voteAvg={movie.voteAvg} setModalId={setModalId} setIsModalOpen={setIsModalOpen}/>
         ))}
         </section>
-        {data.length > 0 && <button onClick={HandleLoadMore}>Load More</button>}
+        {data.length > 0 && <button className='load-more-btn' onClick={HandleLoadMore}>Load More</button>}
     </>
     );
 }

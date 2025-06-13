@@ -42,7 +42,9 @@ main {
 }
 .search-bar form button{
   height: 90%;
-
+}
+.search-bar form button:hover{
+  background-color: var(--color-1);
 }
 .App-header h1 {
   font-family: "Pixelify Sans", sans-serif;
