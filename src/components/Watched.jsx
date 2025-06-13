@@ -1,11 +1,11 @@
 import {useState, useEffect, useContext} from 'react';
 import MovieCard from './MovieCard';
 import {parseMovieDetails, handleSort, getMovieDetails} from '../utils/utils.js';
-import { LikedWatchedContext} from "../App.jsx";
+import { LikedWatchedSearchContext} from "../App.jsx";
 
 function Watched({setModal, setIsModalOpen, isModalOpen, sort}){
     const [data, setData] = useState([]); //what will show in MovieCards
-    const watchContext = useContext(LikedWatchedContext);
+    const watchContext = useContext(LikedWatchedSearchContext);
     const watched = watchContext.watchedList;
 
     //initial load

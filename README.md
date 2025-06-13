@@ -4,7 +4,7 @@ Submitted by: Gianna Besmonte
 
 Estimated time spent: 20 hours spent in total
 
-Deployed Application (**required**): [Flixster Deployed Site](ADD_LINK_HERE)
+Deployed Application (**required**): https://flixster-n2fs.onrender.com
 
 ### Application Features
 
