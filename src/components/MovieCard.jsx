@@ -57,7 +57,7 @@ function MovieCard({id, title, img, voteAvg, setModalId, setIsModalOpen}){
     }, [watchedList, id]);
 
     return(
-    <div className="movie-card" onClick={() => (setModalId(id), setIsModalOpen(true))}>
+    <div className="movie-card enlarge-on-hover" onClick={() => (setModalId(id), setIsModalOpen(true))}>
         <img className="movie-card-img" src={`https://image.tmdb.org/t/p/w500${img}`} alt={title} />
         <h3 className="movie-card-title">{title}</h3>
         <div className="movie-card-body">
