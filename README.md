@@ -30,10 +30,10 @@ Deployed Application (**required**): [Flixster Deployed Site](ADD_LINK_HERE)
   - [X] Users can click the Clear button. When clicked:
     - [X] Most recent search results are cleared from the text input field and the grid view and all current movies are displayed in a grid view
 - [X] **Design Features**
-  - [ ] Website implements all of the following accessibility features:
-    - [ ] Semantic HTML
-    - [ ] [Color contrast](https://webaim.org/resources/contrastchecker/)
-    - [ ] Alt text for images
+  - [X] Website implements all of the following accessibility features:
+    - [X] Semantic HTML
+    - [X] [Color contrast](https://webaim.org/resources/contrastchecker/)
+    - [X] Alt text for images
   - [X] Website implements responsive web design.
     - [X] Uses CSS Flexbox or CSS Grid
     - [X] Movie tiles and images shrink/grow in response to window size
@@ -55,14 +55,14 @@ Deployed Application (**required**): [Flixster Deployed Site](ADD_LINK_HERE)
     - [X] When a sort option is clicked, movies display in a grid according to selected criterion.
   - [X] Website displays:
     - [X] Header section
-    - [ ] Banner section
+    - [X] Banner section
     - [X] Search bar
     - [X] Movie grid
     - [X] Footer section
-    - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: To ease the grading process, please use the [color contrast checker](https://webaim.org/resources/contrastchecker/) to demonstrate to the grading team that text and background colors on your website have appropriate contrast. The Contrast Ratio should be above 4.5:1 and should have a green box surrounding it.
-  - [ ] **Deployment**
-  - [ ] Website is deployed via Render.
-  - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: For ease of grading, please use the deployed version of your website when creating your walkthrough.
+    - [X] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: To ease the grading process, please use the [color contrast checker](https://webaim.org/resources/contrastchecker/) to demonstrate to the grading team that text and background colors on your website have appropriate contrast. The Contrast Ratio should be above 4.5:1 and should have a green box surrounding it.
+  - [X] **Deployment**
+  - [X] Website is deployed via Render.
+  - [X] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: For ease of grading, please use the deployed version of your website when creating your walkthrough.
 
 #### STRETCH FEATURES
 
@@ -100,28 +100,27 @@ Deployed Application (**required**): [Flixster Deployed Site](ADD_LINK_HERE)
 
 ### Walkthrough Video
 
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website! (🚫 Remove this paragraph after adding walkthrough video)
 
-`ADD_EMBEDDED_CODE_HERE`
 
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+Yes, the topics discussed in the labs prepared me, especially the lectures on useState and useEffect. It was insightful to know how React State worked and how rerenders are triggered. I feel like I used that most when I developed my project.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
 
-Add your response here
+I would have added more functions in my utils while coding the majority of the project instead of refactoring it later.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+I was able to get the majority of the functionality done by the middle of the week, which allowed a lot of time for code reviews, refactoring, and styling. I really like how one of my peers used React-Router for the different pages.
 
 ### Open-source libraries used
 
-- Add any links to open-source libraries used in your project.
+react-icons
 
 ### Shout out
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+Gabe

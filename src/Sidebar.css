@@ -14,7 +14,9 @@
 
 .sidebar-menu-btn {
     position: fixed;
-    top: 0;
-    left: 0;
     height: 2rem;
+    display: flex;
+    border-radius: 0px;
+    justify-content: center;
+    align-items: center;
 }
