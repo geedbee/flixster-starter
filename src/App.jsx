@@ -7,7 +7,7 @@ import Liked from './components/Liked'
 import Watched from './components/Watched'
 import { MdMovieFilter } from "react-icons/md";
 
-export const LikedWatchedContext = createContext();
+export const LikedWatchedSearchContext = createContext();
 export const Page = {
   Home: 0,
   Liked: 1,
@@ -91,12 +91,12 @@ const App = () => {
         </div>
       </header>
       <main>
-        <LikedWatchedContext.Provider value={{watchedList, setWatchedList, likedList, setLikedList}}>
+        <LikedWatchedSearchContext.Provider value={{watchedList, setWatchedList, likedList, setLikedList, search, isSearch}}>
           {pageIdx === Page.Home && <MovieList setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}
-          search={search} isSearch={isSearch} pageIdx={moviePageIdx} setPageIdx={setMoviePageIdx}/>}
+          pageIdx={moviePageIdx} setPageIdx={setMoviePageIdx}/>}
           {pageIdx === Page.Liked && <Liked setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
           {pageIdx === Page.Watched && <Watched setModal={setModal} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} sort={sort}/>}
-        </LikedWatchedContext.Provider>
+        </LikedWatchedSearchContext.Provider>
       </main>
       <footer>Flixster ©{new Date().getFullYear()}</footer>
     </div>

@@ -1,10 +1,13 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import { parseMovieData , parseMovieDetails, handleSort, getMovieDetails} from '../utils/utils';
 import MovieCard from './MovieCard';
+import {LikedWatchedSearchContext} from "../App.jsx"
 
-function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPageIdx, search, isSearch}){
+function MovieList({setModal, setIsModalOpen, isModalOpen, sort, pageIdx, setPageIdx}){
     const [data, setData] = useState([]); //what will show in MovieCards
-
+    const context = useContext(LikedWatchedSearchContext);
+    const search = context.search;
+    const isSearch = context.isSearch;
     //initial load
     useEffect(() => {
         fetchNewMovieData(true);
