@@ -1,3 +1,6 @@
 .load-more-btn:hover {
     background-color: var(--color-1);
 }
+.load-more-btn{
+    margin: 5px;
+}
