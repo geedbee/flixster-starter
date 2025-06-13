@@ -6,10 +6,14 @@
 }
 
 .sidebar-body {
-    margin-top: 2rem;
+    margin-top: 2.2rem;
     display: flex;
     flex-direction: column;
     background-color: var(--color-3);
+    width: 10rem;
+    box-shadow: black 2px 2px 5px;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .sidebar-menu-btn {
@@ -19,4 +23,22 @@
     border-radius: 0px;
     justify-content: center;
     align-items: center;
+}
+
+.sidebar-menu-btn:hover{
+    background-color: var(--color-1);
+}
+
+.sidebar-dropdown{
+   width: 100%;
+   border-radius: 0px;
+   margin: 0;
+}
+.sidebar-dropdown:hover{
+    background-color: var(--color-1);
+    color: white;
+}
+
+.blue {
+    background-color: var(--color-1);
 }
