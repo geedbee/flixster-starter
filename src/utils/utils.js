@@ -1,4 +1,4 @@
-//given data.results, parse the data and return an array of objects
+//given an array of movies, parse the data and return an array of objects
 const parseMovieData = function parseMovieData(results) {
     if (!results){
         return [];
@@ -16,6 +16,7 @@ const parseMovieData = function parseMovieData(results) {
     return dataArr;
 }
 
+//given data for one movie, parse and return results
 const parseMovieDetails = function parseMovieDetails(data) {
     if (!data){
         return [];
@@ -36,12 +37,14 @@ const parseMovieDetails = function parseMovieDetails(data) {
     return details;
 }
 
+//convert the API runtime minutes into user friendly format
 const convertRuntime = function convertRuntime(minutes){
     const hours = Math.floor(minutes/60);
     const mins = minutes % 60;
     return hours + 'h ' + mins + 'm';
 }
 
+//convert the release date into friendlier format
 const convertReleaseDate = function convertReleaseDate(date){
     const dateArr = date.split('-');
     return dateArr[1] + '/' + dateArr[2] + '/' + dateArr[0];
@@ -57,6 +60,7 @@ const compareDates = function compareDates(a, b){
     return date2 - date1;
 }
 
+//sort functionality
 function handleSort(sort, data){
     if (sort != 'none'){
         let dataCpy = [...data];

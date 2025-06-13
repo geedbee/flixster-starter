@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext} from 'react';
 import MovieCard from './MovieCard';
-import {parseMovieData, parseMovieDetails, handleSort, getMovieDetails} from '../utils/utils.js';
+import {parseMovieDetails, handleSort, getMovieDetails} from '../utils/utils.js';
 import {LikedWatchedContext} from "../App.jsx"
 
 function Liked({setModal, setIsModalOpen, isModalOpen, sort}){
@@ -8,7 +8,7 @@ function Liked({setModal, setIsModalOpen, isModalOpen, sort}){
     const likeContext = useContext(LikedWatchedContext);
     const liked = likeContext.likedList;
 
-    //initial load
+    //dependent on if likedList changes
     useEffect(() => {
         fetchLikedData();
     }, [liked]);
@@ -33,14 +33,6 @@ function Liked({setModal, setIsModalOpen, isModalOpen, sort}){
     }, [sort]);
 
     const fetchLikedData = async () => {
-        const apiKey = import.meta.env.VITE_API_KEY;
-        const options = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${apiKey}`
-            }
-        };
         setData([]);
         let likedData = [];
         for (let id of liked){
