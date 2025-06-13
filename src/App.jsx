@@ -67,23 +67,25 @@ const App = () => {
   return (
     <div className="App">
       {isModalOpen && modal && <Modal modalInfo={modal} setModal={setModal} setIsModalOpen={setIsModalOpen}></Modal>}
-      <Sidebar pageIdx={pageIdx} setPageIdx={setPageIdx}></Sidebar>
+      <nav>
+        <Sidebar pageIdx={pageIdx} setPageIdx={setPageIdx}></Sidebar>
+      </nav>
       <header className="App-header">
         <h1><MdMovieFilter />Flixster</h1>
-        <div className="sort-bar">
+        <aside className="sort-bar">
             <select name="sort" onChange={HandleSort}>
                 {options.map((option, index) => (
                   <option key={index} value={option}>{option === "none" ? "Sort By" : option[0].toUpperCase() + option.slice(1)}</option>
                 ))}
              </select>
-        </div>
-        <div className="search-bar">
+        </aside>
+        <aside className="search-bar">
           <form onSubmit={HandleSearch}>
               <input type="text" name="search" value={search} onChange={HandleSearchChange} placeholder="Search"/>
               <button type="submit">Search</button>
               <button type="button" onClick={HandleClear}>Clear</button>
           </form>
-        </div>
+        </aside>
       </header>
       <main>
         <LikedWatchedContext.Provider value={{watchedList, setWatchedList, likedList, setLikedList}}>

@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext} from 'react';
 import MovieCard from './MovieCard';
-import {parseMovieData, parseMovieDetails, compareDates, handleSort, getMovieDetails} from '../utils/utils.js';
+import {parseMovieDetails, handleSort, getMovieDetails} from '../utils/utils.js';
 import { LikedWatchedContext} from "../App.jsx";
 
 function Watched({setModal, setIsModalOpen, isModalOpen, sort}){
@@ -33,14 +33,6 @@ function Watched({setModal, setIsModalOpen, isModalOpen, sort}){
     }, [sort]);
 
     const fetchWatchedData = async () => {
-        const apiKey = import.meta.env.VITE_API_KEY;
-        const options = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${apiKey}`
-            }
-        };
         setData([]);
         let watchedData = [];
         for (let id of watched){

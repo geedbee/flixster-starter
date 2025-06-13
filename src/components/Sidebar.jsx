@@ -16,14 +16,14 @@ function Sidebar({pageIdx, setPageIdx}){
     }
     return (
     <>
-        <div className='sidebar-container'>
+        <nav className='sidebar-container'>
             <button className='sidebar-menu-btn' onClick={OpenMenu}><IoMenuSharp/></button>
             {isOpen && <div className='sidebar-body'>
                 <button onClick={() => HandleClick(Page.Home)}>Home</button>
                 <button onClick={() => HandleClick(Page.Liked)}>Liked</button>
                 <button onClick={() => HandleClick(Page.Watched)}>Watched</button>
             </div>}
-        </div>
+        </nav>
     </>);
 }
 
