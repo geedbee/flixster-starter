@@ -46,3 +46,11 @@
     color: var(--color-1);
     font-size: 20px;
 }
+
+.enlarge-on-hover {
+    transition: transform 0.2s;
+}
+
+.enlarge-on-hover:hover {
+    transform: scale(1.08);
+}
