@@ -22,6 +22,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+.modal-info{
+    padding: 20px;
+    padding-right: 40px;
+}
 .hidden {
     display:none;
 }
