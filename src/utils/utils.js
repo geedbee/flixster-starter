@@ -1,3 +1,4 @@
+import {Sort} from "../App.jsx"
 //given an array of movies, parse the data and return an array of objects
 const parseMovieData = function parseMovieData(results) {
     if (!results){
@@ -62,17 +63,18 @@ const compareDates = function compareDates(a, b){
 
 //sort functionality
 function handleSort(sort, data){
-    if (sort != 'none'){
-        let dataCpy = [...data];
-        if (sort === 'name'){
-            return dataCpy.sort((a, b) => a.title.localeCompare(b.title));
-        }
-        else if (sort === 'votes'){
-            return dataCpy.sort((a, b) => b.voteAvg - a.voteAvg);
-        }
-        else if (sort === 'dates'){
-            return dataCpy.sort((a, b) => compareDates(a.releaseDate, b.releaseDate));
-        }
+    let dataCpy = [...data];
+    if (sort == Sort.name){
+        return dataCpy.sort((a, b) => a.title.localeCompare(b.title));
+    }
+    else if (sort == Sort.votes){
+        return dataCpy.sort((a, b) => b.voteAvg - a.voteAvg);
+    }
+    else if (sort == Sort.dates){
+        return dataCpy.sort((a, b) => compareDates(a.releaseDate, b.releaseDate));
+    }
+    else {
+        return data;
     }
 }
 

@@ -13,13 +13,19 @@ export const Page = {
   Liked: 1,
   Watched: 2
 }
+export const Sort = {
+  none: 0,
+  name: 1,
+  dates: 2,
+  votes: 3,
+}
 
 const App = () => {
   //modal handling
   const [modal, setModal] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   //sort handling
-  const [sort, setSort] = useState('none');
+  const [sort, setSort] = useState(Sort.none);
 
   const [likedList, setLikedList] = useState([]);
   const [watchedList, setWatchedList] = useState([]);
@@ -32,18 +38,9 @@ const App = () => {
 
   //sort handling
   function HandleSort(e){
-    switch (e.target.value){
-      case 'name':
-        setSort('name');
-        break;
-      case 'dates':
-        setSort('dates');
-        break;
-      case 'votes':
-        setSort('votes');
-        break;
-    }
+    setSort(e.target.value);
   }
+
   //handle search
   const [search, setSearch] = useState('');
   const [moviePageIdx, setMoviePageIdx] = useState(1);
@@ -63,7 +60,8 @@ const App = () => {
       setMoviePageIdx(1);
   }
 
-  const options = ["none", "name", "dates", "votes"];
+  const options = [Sort.none, Sort.name, Sort.dates, Sort.votes];
+  const optionsText = ["none", "name", "dates", "votes"];
 
   return (
     <div className="App">
@@ -77,7 +75,7 @@ const App = () => {
           <aside className="sort-bar">
             <select className="sort-select" name="sort" onChange={HandleSort}>
                 {options.map((option, index) => (
-                  <option key={index} value={option}>{option === "none" ? "Sort By" : option[0].toUpperCase() + option.slice(1)}</option>
+                  <option key={index} value={option}>{option === Sort.none ? "Sort By" : optionsText[option][0].toUpperCase() + optionsText[option].slice(1)}</option>
                 ))}
              </select>
           </aside>
