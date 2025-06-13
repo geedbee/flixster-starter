@@ -19,12 +19,30 @@
 main {
   padding-top: 15vh;
 }
-.sort-bar select, .search-bar input {
+.selection{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.sort-bar, .search-bar{
+  height: 2rem;
+  margin-right: 5px;
+}
+.sort-select, .search-bar input {
   background-color: white;
   border-radius: 5px;
   padding: 5px;
   border: 1px solid black;
   font-family: 'Lexend', sans-serif;
+  height: 100%;
+  box-sizing: border-box;
+}
+.search-bar form {
+  height: 100%;
+}
+.search-bar form button{
+  height: 90%;
+  
 }
 .App-header h1 {
   font-family: "Pixelify Sans", sans-serif;

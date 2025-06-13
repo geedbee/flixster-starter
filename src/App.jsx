@@ -72,20 +72,22 @@ const App = () => {
       </nav>
       <header className="App-header">
         <h1><MdMovieFilter />Flixster</h1>
-        <aside className="sort-bar">
-            <select name="sort" onChange={HandleSort}>
+        <div className='selection'>
+          <aside className="sort-bar">
+            <select className="sort-select" name="sort" onChange={HandleSort}>
                 {options.map((option, index) => (
                   <option key={index} value={option}>{option === "none" ? "Sort By" : option[0].toUpperCase() + option.slice(1)}</option>
                 ))}
              </select>
-        </aside>
-        <aside className="search-bar">
-          <form onSubmit={HandleSearch}>
-              <input type="text" name="search" value={search} onChange={HandleSearchChange} placeholder="Search"/>
-              <button type="submit">Search</button>
-              <button type="button" onClick={HandleClear}>Clear</button>
-          </form>
-        </aside>
+          </aside>
+          <aside className="search-bar">
+            <form onSubmit={HandleSearch}>
+                <input type="text" name="search" value={search} onChange={HandleSearchChange} placeholder="Search"/>
+                <button type="submit">Search</button>
+                <button type="button" onClick={HandleClear}>Clear</button>
+            </form>
+          </aside>
+        </div>
       </header>
       <main>
         <LikedWatchedContext.Provider value={{watchedList, setWatchedList, likedList, setLikedList}}>
